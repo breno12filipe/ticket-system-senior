@@ -1,0 +1,18 @@
+FROM node:20-alpine
+
+WORKDIR /usr/src/app
+
+RUN npm install -g @nestjs/cli
+
+# Copia os arquivos de dependência
+COPY package*.json ./
+
+# Instala as dependencias
+RUN npm install
+
+# O código não vai ser copiado
+# Vou linkar ele com Volume no docker-compose para utilizar hot reload.
+
+USER node
+
+CMD ["npm", "run", "start:dev"]
